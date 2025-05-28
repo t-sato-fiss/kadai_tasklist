@@ -10,6 +10,7 @@ import java.util.List;
 import jakarta.persistence.EntityManager;
 import models.Task;
 import utils.Task_DBUtil;
+import jakarta.servlet.RequestDispatcher;
 /**
  * Servlet implementation class Task_IndexServlet
  */
@@ -32,9 +33,13 @@ public class Task_IndexServlet extends HttpServlet {
         EntityManager em = Task_DBUtil.createEntityManager();
 
         List<Task> tasks = em.createNamedQuery("getAllTasks", Task.class).getResultList();
-        response.getWriter().append(Integer.valueOf(tasks.size()).toString());
 
         em.close();
+
+        request.setAttribute("tasks", tasks);
+
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/task_index.jsp");
+        rd.forward(request, response);
     }
 
 }
