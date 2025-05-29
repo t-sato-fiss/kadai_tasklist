@@ -66,7 +66,7 @@ public class Task_CreateServlet extends HttpServlet {
                 em.close();
 
                 // indexのページにリダイレクト
-                response.sendRedirect(request.getContextPath() + "/index");
+                response.sendRedirect(request.getContextPath() + "/task_index");
             }
         }
     }
